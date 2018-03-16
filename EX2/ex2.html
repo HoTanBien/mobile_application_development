@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ex2</title>
+	</head>
+	<body>
+
+		<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+		Latitude1:
+		<input type = "text" id = "idex"> 
+		Longitude1:
+		<input type = "text" id = "idex1"> <br>
+		<br>
+		<button type "button" onClick = "FindAddress()"> Find </button> <br> 
+		<p id = "result"></p>
+
+		Latitude2:
+		<input type = "text" id = "idex2"> 
+		Longitude2:
+		<input type = "text" id = "idex3"> <br>
+		<br>
+		<button type "button" onClick = "FindAddress1()"> Find </button> <br> 
+		<p id = "result1"></p>
+
+		<br>
+		<button type="button" onclick="Distance()">Distance</button>
+		<br>
+		<p id="Dis"></p>
+
+		<script>
+			var x = document.getElementById("result");
+			var x1 = document.getElementById("result1");
+			var x2 = document.getElementById("Dis");
+
+			function FindAddress() 
+			{
+		        var input = document.getElementById('idex').value;
+		        var input1 = document.getElementById('idex1').value;
+		        var Addrees = {lat: parseFloat(input), lng: parseFloat(input1)};
+		        var geocoder = new google.maps.Geocoder;
+		        geocoder.geocode({'location': Addrees}, function(results, status) {
+		          if (status === 'OK') {
+		            if (results[0]) {
+		              x.innerHTML = results[0].formatted_address;
+
+		            } else {
+		              window.alert('No results found');
+		            }
+		          } else {
+		            window.alert('Geocoder failed due to: ' + status);
+		          }
+		        });
+      		}
+      		function FindAddress1() 
+			{
+		        var input = document.getElementById('idex2').value;
+		        var input1 = document.getElementById('idex3').value;
+		        var Addrees = {lat: parseFloat(input), lng: parseFloat(input1)};
+		        var geocoder = new google.maps.Geocoder;
+		        geocoder.geocode({'location': Addrees}, function(results, status) {
+		          if (status === 'OK') {
+		            if (results[0]) {
+		              x1.innerHTML = results[0].formatted_address;
+
+		            } else {
+		              window.alert('No results found');
+		            }
+		          } else {
+		            window.alert('Geocoder failed due to: ' + status);
+		          }
+		        });
+      		}
+      		function deg2rad(deg) {
+				return deg * (Math.PI/180);
+			}
+
+			function Distance() {
+			
+				var input = document.getElementById('idex').value;
+		        var input1 = document.getElementById('idex1').value;
+
+				var lat1 = parseFloat(input);
+				var lng1 = parseFloat(input1);
+				
+
+				var input2 = document.getElementById('idex2').value;
+		        var input3 = document.getElementById('idex3').value;
+
+				var lat2 = parseFloat(input2);
+				var lng2 = parseFloat(input3);
+				
+
+				var R = 6371; // Radius of the earth in km
+				var KqLat = deg2rad(lat2-lat1);  
+				var KqLng = deg2rad(lng2-lng1); 
+				console.log(lat2+" "+lng2);
+				var a = 
+					Math.sin(KqLat/2) * Math.sin(KqLat/2) +
+					Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+					Math.sin(KqLng/2) * Math.sin(KqLng/2)
+					; 
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+				var d = R * c; // Distance in km
+				x2.innerHTML = "Distance: "+ d +" km"; 
+			}
+		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXeMGnStUtUn5N5Gsdy40LcNvARvqjGTc"></script>
+	</body>
+</html>

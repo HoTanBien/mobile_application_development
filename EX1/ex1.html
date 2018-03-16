@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ex1</title>
+	</head>
+	<body>
+		<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+		Latitude:
+		<input type = "text" id = "idex"> 
+		Longitude:
+		<input type = "text" id = "idex1"> <br>
+		<br>
+		<button type "button" onClick = "FindAddress()"> Find </button> <br> 
+		<p id = "result"></p>
+		<script>
+			var x = document.getElementById("result")
+			function FindAddress() {
+		        var input = document.getElementById('idex').value;
+		        var input1 = document.getElementById('idex1').value;
+		        var Addrees = {lat: parseFloat(input), lng: parseFloat(input1)};
+		        var geocoder = new google.maps.Geocoder;
+		        geocoder.geocode({'location': Addrees}, function(results, status) {
+		          if (status === 'OK') {
+		            if (results[0]) {
+		              x.innerHTML = results[0].formatted_address;
+
+		            } else {
+		              window.alert('No results found');
+		            }
+		          } else {
+		            window.alert('Failed: ' + status);
+		          }
+		        });
+      	}
+		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXeMGnStUtUn5N5Gsdy40LcNvARvqjGTc"></script>
+	</body>
+</html>
