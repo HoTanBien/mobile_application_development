@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bài tâp 2</title>
+<script type="text/javascript">
+
+function DoiTienTe()
+{
+	var DV1 =document.getElementById("select");
+	var DV2 =document.getElementById("select2");
+	var Money =document.getElementById("myMoney");
+	var kq;
+	var theP=document.getElementById("result");
+	if(Money.value =='')
+	{
+		alert("chưa nhập tiền");
+	}
+	 else if(isNaN(Money.value))
+		alert("nhập sai");
+		//USD->VN
+	 else if(DV1.value==0 && DV2.value==1)
+	 		{
+				kq=Money.value*22740;
+				theP.innerHTML=kq+" VND";
+				
+			}
+			//VN->VN
+	else if(DV1.value==1 && DV2.value==1)
+	 		{
+				kq=Money.value;
+				theP.innerHTML=kq+" VND";
+				
+			}	
+			//EURO->VN	
+	 else if(DV1.value==2 && DV2.value==1)
+	 		{
+				kq=Money.value*27907;
+				theP.innerHTML=kq+" VND";
+				
+			}
+			//USD->USD
+	else if(DV1.value==0 && DV2.value==0)
+	 		{
+				kq=Money.value;
+				theP.innerHTML=kq+" USD";
+				
+			}
+			//USD->EURO
+	else if(DV1.value==0 && DV2.value==2)
+	 		{
+				kq=Money.value*0.81;
+				theP.innerHTML=kq+" EUR";
+				
+			}	
+			//VN->USD
+	else if(DV1.value==1 && DV2.value==0)
+	 		{
+				kq=Money.value/22740;
+				theP.innerHTML=kq+" USD";
+				
+			}
+			//VN->EURO
+	else if(DV1.value==1 && DV2.value==2)
+	 		{
+				kq=Money.value/27907;
+				theP.innerHTML=kq+" EUR";
+				
+			}
+			//EURO->USD
+	else if(DV1.value==2 && DV2.value==0)
+	 		{
+				kq=Money.value*1.23;
+				theP.innerHTML=kq+" USD";
+				
+			}	
+			//EURO->EURO
+	else if(DV1.value==2 && DV2.value==2)
+	 		{
+				kq=Money.value;
+				theP.innerHTML=kq+" EUR";				
+			}												
+										
+}
+
+
+</script>
+</head>
+
+<body>
+<div>
+	
+		 <div><p><b>CHUYỂN ĐỔI TIỀN TỆ</b></p></div>
+		 <div>
+		 	<select name="select" id="select" style="width:5%">
+			    	<option value="0" selected>USD</option>
+			    	<option value="1" >VND</option>
+			     	<option value="2">EUR</option>
+		    </select>
+		    <input type="text" name="text" id="myMoney" style="width:20%"></td>
+		 </div>    
+		 
+		  <div>
+		  	<select name="select2" id="select2" style="width:5%">
+			        <option value="0">USD</option>
+			        <option value="1" selected>VND</option>
+			        <option value="2">EUR</option>
+		    </select>
+		    <p id="result" style="display: inline-block;padding-left: 5px;"></p>		   
+		  </div><br/>	    
+		  <div>
+		  	<input type="button" name="button" id="button" value="Đổi Tiền" onClick="DoiTienTe()">
+		  </div>	
+</div>
+
+</body>
+</html>
